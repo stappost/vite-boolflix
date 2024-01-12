@@ -3,6 +3,7 @@
 import axios from "axios";
 // COMPONENTS 
 import AppHeader from './components/AppHeader.vue';
+import AppMain from './components/AppMain.vue';
 // STORE 
 import { store } from './store'
 export default {
@@ -13,6 +14,7 @@ export default {
   },
   components: {
     AppHeader,
+    AppMain,
   },
   methods: {
     load_films() {
@@ -31,6 +33,7 @@ export default {
 <template lang="">
   <div>
     <AppHeader @load_page="load_films"/>
+    <AppMain />
   </div>
 </template>
 <style lang="">
