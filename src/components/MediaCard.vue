@@ -44,14 +44,14 @@ export default {
 </script>
 <template lang="">
     <div class="card">
-        <div v-if="media.image != null">
+        <div v-if="media.image != null" class="card-front">
             <img :src="'https://image.tmdb.org/t/p/w185' + media.image"  :alt="media.title">
         </div>
-        <div v-else>
+        <div v-else class="card-front">
             <img src="../assets/img/placeholder.png" :alt="media.title">
         </div>
 
-        <ul >
+        <ul class="card-back">
             <li>{{media.title}}</li>
             <li>{{media.original_title}}</li>
             <li> <img :src="getFlag(media.language)" :alt='getFlag(media.language)'></li>
@@ -68,12 +68,37 @@ export default {
 
 .card {
     margin: 20px;
-    border: 1px solid black;
-    padding: 10px;
 
-    ul {
-        list-style: none;
+    padding: 10px;
+    position: relative;
+    transform-origin: center;
+    transform-style: preserve-3d;
+    transition: transform 1s;
+
+    .card-back,
+    .card-front {
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
     }
 
+    .card-back {
+        list-style: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-color: black;
+        color: white;
+    }
+
+    .card-back {
+        transform: rotatey(180deg);
+    }
+
+
+}
+
+.card:hover {
+    transform: rotatey(180deg);
 }
 </style>
