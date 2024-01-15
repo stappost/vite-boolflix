@@ -28,11 +28,12 @@ export default {
           let movies = results.data.results
           movies.forEach((elem) => {
             let obj = {
-              image: 'https://image.tmdb.org/t/p/w342' + elem.poster_path,
+              image: elem.poster_path,
               title: elem.title,
               original_title: elem.original_title,
               vote: elem.vote_average,
-              language: elem.original_language
+              language: elem.original_language,
+              overview: elem.overview
             }
 
             store.films.push(obj)
@@ -47,7 +48,8 @@ export default {
               title: elem.name,
               original_title: elem.original_name,
               vote: elem.vote_average,
-              language: elem.original_language
+              language: elem.original_language,
+              overview: elem.overview
             }
 
             store.series_tv.push(obj)
@@ -64,6 +66,6 @@ export default {
     <AppMain />
   </div>
 </template>
-<style lang="">
-  
+<style lang="scss">
+@use './styles/generals.scss' as *;
 </style>

@@ -45,20 +45,22 @@ export default {
 <template lang="">
     <div class="card">
         <div v-if="media.image != null" class="card-front">
-            <img :src="'https://image.tmdb.org/t/p/w185' + media.image"  :alt="media.title">
+            <img :src="'https://image.tmdb.org/t/p/w342' + media.image"  :alt="media.title">
         </div>
         <div v-else class="card-front">
             <img src="../assets/img/placeholder.png" :alt="media.title">
         </div>
 
         <ul class="card-back">
-            <li>{{media.title}}</li>
-            <li>{{media.original_title}}</li>
+            <li><h2>{{media.title}}</h2></li>
+            <li><i>{{media.original_title}}</i></li>
             <li> <img :src="getFlag(media.language)" :alt='getFlag(media.language)'></li>
             <li>
                 <i v-for="number, index in array_votes"  class="fa-solid fa-star" v-show="number <= getVote(media.vote) " style="color: #FFD43B;"></i>
                 <i v-for="number, index in array_votes"  class="fa-solid fa-star" v-show="number > getVote(media.vote) "></i>
             </li>
+            <li><h3>Trama</h3></li>
+            <li>{{media.overview}}</li>
         </ul>
     </div>
 </template>
@@ -67,13 +69,12 @@ export default {
 
 
 .card {
-    margin: 20px;
 
-    padding: 10px;
     position: relative;
     transform-origin: center;
     transform-style: preserve-3d;
     transition: transform 1s;
+
 
     .card-back,
     .card-front {
@@ -89,6 +90,14 @@ export default {
         left: 0;
         background-color: black;
         color: white;
+        text-align: center;
+        padding-top: 10px;
+        overflow: auto;
+
+        li {
+            margin: 10px 10px;
+            font-size: 20px;
+        }
     }
 
     .card-back {
