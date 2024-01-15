@@ -19,6 +19,8 @@ export default {
   methods: {
     load_media() {
       if (store.search != '') {
+        store.films = []
+        store.series_tv = []
         let apifilms = store.apiUrlFilm
         let apiTv = store.apiUrlSerie
         apifilms += `?api_key=${store.api_key}&query=${store.search}`
@@ -26,7 +28,7 @@ export default {
           let movies = results.data.results
           movies.forEach((elem) => {
             let obj = {
-              image: elem.poster_path,
+              image: 'https://image.tmdb.org/t/p/w342' + elem.poster_path,
               title: elem.title,
               original_title: elem.original_title,
               vote: elem.vote_average,
@@ -41,12 +43,13 @@ export default {
           let series = results.data.results
           series.forEach((elem) => {
             let obj = {
-              image: elem.poster_path,
+              image: 'https://image.tmdb.org/t/p/w342' + elem.poster_path,
               title: elem.name,
               original_title: elem.original_name,
               vote: elem.vote_average,
               language: elem.original_language
             }
+            console.log(elem.poster_path)
 
             store.series_tv.push(obj)
           })

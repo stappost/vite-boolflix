@@ -5,11 +5,28 @@ export default {
     },
     methods: {
         getFlag(lang) {
-            if (lang == 'en') {
-                lang = 'gb'
-            }
-            else if (lang == 'ja') {
-                lang = 'jp'
+            switch (lang) {
+                case 'en':
+                    lang = "gb";
+                    break;
+                case 'ja':
+                    lang = "jp";
+                    break;
+                case 'uk':
+                    lang = "ua";
+                    break;
+                case 'ko':
+                    lang = "kr";
+                    break;
+                case 'hi':
+                    lang = "in";
+                    break;
+                case 'el':
+                    lang = "gr";
+                    break;
+                case 'da':
+                    lang = "dk";
+                    break;
             }
             return `https://flagsapi.com/${lang.toUpperCase()}/shiny/24.png`
         }
@@ -18,6 +35,10 @@ export default {
 </script>
 <template lang="">
     <div class="card">
+        <div >
+            <img :src='media.image'  :alt="media.title">
+        </div>
+
         <ul >
             <li>{{media.title}}</li>
             <li>{{media.original_title}}</li>
@@ -27,10 +48,14 @@ export default {
     </div>
 </template>
 <style lang="scss" scoped>
-ul {
+.card {
     margin: 20px;
     border: 1px solid black;
     padding: 10px;
-    list-style: none;
+
+    ul {
+        list-style: none;
+    }
+
 }
 </style>
