@@ -1,44 +1,41 @@
 <script>
-import { store } from '../store'
+import { store } from '../store';
+
+import MediaCard from './MediaCard.vue';
+
 export default {
+    components: {
+        MediaCard,
+
+    },
     data() {
         return {
             store
         }
     },
-    methods: {
-        getFlag(lang) {
-            if (lang == 'en') {
-                lang = 'gb'
-            }
-            else if (lang == 'ja') {
-                lang = 'jp'
-            }
-            return `https://flagsapi.com/${lang.toUpperCase()}/shiny/24.png`
-        }
-    }
+
 }
 </script>
 <template lang="">
     <main>
-        <ul v-for="film, index in store.films" :key="index">
-            <li>{{film.title}}</li>
-            <li>{{film.original_title}}</li>
-            <li> <img :src="getFlag(film.original_language)" :alt='getFlag(film.original_language)'></li>
-            <li>{{film.vote_average}}</li>
-        </ul>
-        
+        <div v-if="store.films.length > 0">
+            <h2>Films</h2>
+            <div class="cards">
+                <MediaCard v-for="film, index in store.films" :key="index" :media='film'/>
+            </div>
+        </div>
+        <div v-if="store.series_tv.length > 0">
+            <h2>Serie TV</h2>
+            <div class="cards">
+                <MediaCard v-for="serie, index in store.series_tv" :key="index" :media='serie'/>
+            </div>
+        </div>
     </main>
 </template>
 <style lang="scss" scoped>
-main {
+.cards {
     display: flex;
     max-width: 1200px;
     flex-wrap: wrap;
-
-    ul {
-        margin: 20px;
-        border: 1px solid black;
-    }
 }
 </style>

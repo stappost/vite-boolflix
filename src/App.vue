@@ -17,13 +17,39 @@ export default {
     AppMain,
   },
   methods: {
-    load_films() {
+    load_media() {
       if (store.search != '') {
         let apifilms = store.apiUrlFilm
+        let apiTv = store.apiUrlSerie
         apifilms += `?api_key=${store.api_key}&query=${store.search}`
         axios.get(apifilms).then(results => {
-          store.films = results.data.results
-          console.log(store.films)
+          let movies = results.data.results
+          movies.forEach((elem) => {
+            let obj = {
+              image: elem.poster_path,
+              title: elem.title,
+              original_title: elem.original_title,
+              vote: elem.vote_average,
+              language: elem.original_language
+            }
+
+            store.films.push(obj)
+          })
+        })
+        apiTv += `?api_key=${store.api_key}&query=${store.search}`
+        axios.get(apiTv).then(results => {
+          let series = results.data.results
+          series.forEach((elem) => {
+            let obj = {
+              image: elem.poster_path,
+              title: elem.name,
+              original_title: elem.original_name,
+              vote: elem.vote_average,
+              language: elem.original_language
+            }
+
+            store.series_tv.push(obj)
+          })
         })
       }
     },
@@ -32,7 +58,7 @@ export default {
 </script>
 <template lang="">
   <div>
-    <AppHeader @load_page="load_films"/>
+    <AppHeader @load_page="load_media"/>
     <AppMain />
   </div>
 </template>
