@@ -49,7 +49,6 @@ export default {
               vote: elem.vote_average,
               language: elem.original_language
             }
-            console.log(obj.image)
 
             store.series_tv.push(obj)
           })
