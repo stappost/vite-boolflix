@@ -43,13 +43,13 @@ export default {
           let series = results.data.results
           series.forEach((elem) => {
             let obj = {
-              image: 'https://image.tmdb.org/t/p/w342' + elem.poster_path,
+              image: elem.poster_path,
               title: elem.name,
               original_title: elem.original_name,
               vote: elem.vote_average,
               language: elem.original_language
             }
-            console.log(elem.poster_path)
+            console.log(obj.image)
 
             store.series_tv.push(obj)
           })

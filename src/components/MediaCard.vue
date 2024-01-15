@@ -35,8 +35,11 @@ export default {
 </script>
 <template lang="">
     <div class="card">
-        <div >
-            <img :src='media.image'  :alt="media.title">
+        <div v-if="media.image != null">
+            <img :src="'https://image.tmdb.org/t/p/w185' + media.image"  :alt="media.title">
+        </div>
+        <div v-else>
+            <img src="../assets/img/placeholder.png" :alt="media.title">
         </div>
 
         <ul >
