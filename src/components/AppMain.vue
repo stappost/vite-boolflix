@@ -49,6 +49,7 @@ main {
         max-width: 1200px;
         flex-wrap: wrap;
         margin: 0 auto;
+        justify-content: center;
     }
 }
 </style>

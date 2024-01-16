@@ -69,18 +69,23 @@ export default {
 
 
 .card {
-
     position: relative;
     transform-origin: center;
     transform-style: preserve-3d;
     transition: transform 1s;
-
+    width: calc(100% / 4 - 20px);
 
     .card-back,
     .card-front {
         width: 100%;
         height: 100%;
         backface-visibility: hidden;
+    }
+
+    .card-front {
+        img {
+            width: 100%;
+        }
     }
 
     .card-back {
@@ -109,5 +114,17 @@ export default {
 
 .card:hover {
     transform: rotatey(180deg);
+}
+
+@media screen and (max-width: 980px) {
+    .card {
+        width: calc(100% / 3 - 20px);
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .card {
+        width: calc(100% / 2 - 20px);
+    }
 }
 </style>
