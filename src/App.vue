@@ -17,6 +17,7 @@ export default {
     AppMain,
   },
   methods: {
+    // Function SEARCH FILMS AND TV SERIES 
     load_media() {
       if (store.search != '') {
         store.films = []
@@ -57,6 +58,46 @@ export default {
         })
       }
     },
+    // FUNCTION MOST POPULAR FILM E TV SERIES 
+    getPopular() {
+      if (store.search == '') {
+        axios.get(`https://api.themoviedb.org/3/movie/popular?api_key=${store.api_key}`).then(results => {
+          let movies = results.data.results
+          movies.forEach((elem) => {
+            let obj = {
+              image: elem.poster_path,
+              title: elem.title,
+              original_title: elem.original_title,
+              vote: elem.vote_average,
+              language: elem.original_language,
+              overview: elem.overview
+            }
+
+            store.films.push(obj)
+          })
+        })
+
+        axios.get(`https://api.themoviedb.org/3/tv/popular?api_key=${store.api_key}`).then(results => {
+          let series = results.data.results
+          series.forEach((elem) => {
+            let obj = {
+              image: elem.poster_path,
+              title: elem.name,
+              original_title: elem.original_name,
+              vote: elem.vote_average,
+              language: elem.original_language,
+              overview: elem.overview
+            }
+
+            store.series_tv.push(obj)
+          })
+        })
+      }
+    }
+
+  },
+  created() {
+    this.getPopular()
   }
 }
 </script>

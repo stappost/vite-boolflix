@@ -73,7 +73,7 @@ export default {
     transform-origin: center;
     transform-style: preserve-3d;
     transition: transform 1s;
-    width: calc(100% / 4 - 20px);
+    width: calc(100% / 6 - 20px);
 
     .card-back,
     .card-front {
